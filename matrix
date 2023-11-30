@@ -1,0 +1,137 @@
+#include <iostream>
+#include <vector>
+
+bool areMatricesEqual(const std::vector<std::vector<int>>& matrix1, const std::vector<std::vector<int>>& matrix2) {
+    // Проверяем размеры матриц
+    if (matrix1.size() != matrix2.size() || matrix1[0].size() != matrix2[0].size()) {
+        return false;
+    }
+
+    // Проверяем каждый элемент матрицы на равенство
+    for (size_t i = 0; i < matrix1.size(); ++i) {
+        for (size_t j = 0; j < matrix1[0].size(); ++j) {
+            if (matrix1[i][j] != matrix2[i][j]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    // Пример использования функции проверки равенства матриц
+
+    // Задаем матрицы
+    std::vector<std::vector<int>> matrixA = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    std::vector<std::vector<int>> matrixB = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+    // Проверяем равенство матриц и выводим результат
+    if (areMatricesEqual(matrixA, matrixB)) {
+        std::cout << "Матрицы равны" << std::endl;
+    } else {
+        std::cout << "Матрицы не равны" << std::endl;
+    }
+
+    return 0;
+}
+/////////////////
+#include <iostream>
+#include <vector>
+
+// Функция для прибавления второй матрицы к текущей
+void addMatrix(std::vector<std::vector<int>>& currentMatrix, const std::vector<std::vector<int>>& secondMatrix) {
+    // Проверка на соответствие размеров матриц для корректного сложения
+    if (currentMatrix.size() != secondMatrix.size() || currentMatrix[0].size() != secondMatrix[0].size()) {
+        std::cout << "Невозможно выполнить операцию. Размеры матриц не совпадают." << std::endl;
+        return;
+    }
+
+    // Прибавление элементов второй матрицы к элементам текущей матрицы
+    for (size_t i = 0; i < currentMatrix.size(); ++i) {
+        for (size_t j = 0; j < currentMatrix[0].size(); ++j) {
+            currentMatrix[i][j] += secondMatrix[i][j];
+        }
+    }
+}
+
+// Функция для отображения матрицы
+void displayMatrix(const std::vector<std::vector<int>>& matrix) {
+    for (const auto& row : matrix) {
+        for (int value : row) {
+            std::cout << value << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+int main() {
+    // Пример текущей матрицы
+    std::vector<std::vector<int>> currentMatrix = {{1, 2, 3},
+                                                   {4, 5, 6},
+                                                   {7, 8, 9}};
+
+    // Пример второй матрицы для сложения
+    std::vector<std::vector<int>> secondMatrix = {{9, 8, 7},
+                                                  {6, 5, 4},
+                                                  {3, 2, 1}};
+
+    std::cout << "Текущая матрица:" << std::endl;
+    displayMatrix(currentMatrix);
+
+    std::cout << "Вторая матрица:" << std::endl;
+    displayMatrix(secondMatrix);
+
+    // Вызов функции для прибавления второй матрицы к текущей
+    addMatrix(currentMatrix, secondMatrix);
+
+    std::cout << "Результат сложения:" << std::endl;
+    displayMatrix(currentMatrix);
+
+    return 0;
+}
+////////////////////////
+#include <iostream>
+#include <vector>
+
+// Функция для вычитания матриц
+std::vector<std::vector<int>> subtractMatrices(const std::vector<std::vector<int>>& matrix1, const std::vector<std::vector<int>>& matrix2) {
+    // Проверяем, что обе матрицы имеют одинаковые размеры
+    if (matrix1.size() != matrix2.size() || matrix1[0].size() != matrix2[0].size()) {
+        std::cerr << "Матрицы должны иметь одинаковые размеры для выполнения операции вычитания." << std::endl;
+        return {};
+    }
+
+    // Создаем новую матрицу для результата
+    std::vector<std::vector<int>> result(matrix1.size(), std::vector<int>(matrix1[0].size(), 0));
+
+    // Выполняем операцию вычитания
+    for (size_t i = 0; i < matrix1.size(); ++i) {
+        for (size_t j = 0; j < matrix1[0].size(); ++j) {
+            result[i][j] = matrix1[i][j] - matrix2[i][j];
+        }
+    }
+
+    return result;
+}
+
+int main() {
+    // Пример использования
+    std::vector<std::vector<int>> matrix1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    std::vector<std::vector<int>> matrix2 = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+
+    // Вызываем функцию вычитания матриц
+    std::vector<std::vector<int>> result = subtractMatrices(matrix1, matrix2);
+
+    // Выводим результат
+    std::cout << "Результат операции вычитания:" << std::endl;
+    for (const auto& row : result) {
+        for (int value : row) {
+            std::cout << value << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
+////////////////
